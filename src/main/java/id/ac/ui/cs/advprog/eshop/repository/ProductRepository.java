@@ -11,35 +11,35 @@ import java.util.List;
 public class ProductRepository {
     private List<Product> productData = new ArrayList<>();
 
-    public Product create(Product product) {
+    public Product create(Product product){
         productData.add(product);
         return product;
     }
 
-    public Iterator<Product> findAll() {
+    public Product delete(String productId) {
+        Product product = findById(productId);
+        productData.remove(product);
+        return product;
+    }
+
+    public Iterator<Product> findAll(){
         return productData.iterator();
     }
 
-    public Product findById(String id) {
-        for (Product product : productData) {
-            if (product.getProductId().equals(id)) {
-                return product;
-            }
-        }
-        return null;
+    public Product findById(String productId) {
+        return productData.stream()
+                .filter(product -> product.getProductId().equals(productId))
+                .findFirst()
+                .orElseThrow(() ->
+                        new IllegalArgumentException("Invalid product Id:" + productId)
+                );
     }
 
-    public void update(Product updatedProduct) {
-        for (int i = 0; i < productData.size(); i++) {
-            Product product = productData.get(i);
-            if (product.getProductId().equals(updatedProduct.getProductId())) {
-                productData.set(i, updatedProduct);
-                return;
-            }
-        }
-    }
-
-    public void delete(Product product){
-        productData.remove(product);
+    public Product edit(Product editedProduct) {
+        String productId = editedProduct.getProductId();
+        Product existingProduct = findById(productId);
+        int indexOfProduct = productData.indexOf(existingProduct);
+        productData.set(indexOfProduct, editedProduct);
+        return editedProduct;
     }
 }
