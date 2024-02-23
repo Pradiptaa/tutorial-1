@@ -32,3 +32,26 @@ Clean code principles yang sudah diterapkan adalah penamaan variabel dan fungsi 
 
 </details>
 
+<details>
+<summary>
+
+## Modul 3
+</summary>
+
+1. <strong> Explain what principles you apply to your project! </strong> <br>
+
+   - SRP: Memisahkan `CarController` dari `ProductController` untuk memfokuskan kepada Car saja, sehingga memudahkan development.
+   - DIP dan OCP: Menggantikan `CarServiceImpl` dengan `CarService`, memudahkan perubahan dan penambahan komponen tanpa mengubah kode yang sudah ada.
+   - LSP: Menghindari inheritance langsung dari `ProductController` ke `CarController`, memungkinkan subclass menggantikan superclass tanpa mengubah fungsionalitas.
+   - ISP: Memastikan setiap interface fokus pada satu set, sehingga terhindar dari ketergantungan pada fungsi yang tidak digunakan. <br><br>
+2. <strong> Explain the advantages of applying SOLID principles to your project with examples.</strong> <br>
+   
+   - SRP: Penerapan SRP memperjelas kode dan memudahkan pemahaman akan kode yang dibuat dengan memfokuskan setiap kelas dengan sebuah functionality. 
+   - OCP: Penerapan OCP mempermudah untuk menambah functionality tanpa mengubah keseluruhan kode, sehingga mengurangi resiko error. OCP juga mempermudah untuk re-use komponen kode dengan efektif.
+   - LSP: Penerapan LSP membuat program lebih reliable karena menerapkan konsistensi perilaku seluruh class.
+   - ISP: Penerapan ISP meminimalisir kemungkinan untuk perlu mengubah suatu bagian kode ketika ingin mengubah bagian lainnya.
+   - DIP: Penerapan DIP dapat meningkatkan kemudahan testing karena mengutamakan kelonggaran integrasi antar komponen. <br><br>
+3. <strong> Explain the disadvantages of not applying SOLID principles to your project with examples. </strong> <br>
+   Tidak menerapkan prinsip SOLID dalam pengembangan perangkat lunak dapat menyebabkan berbagai kerugian, termasuk sistem yang terlalu bergantung satu sama lain (tight coupling), sulitnya pengujian komponen karena ketergantungan yang kompleks, rendahnya kemampuan untuk menggunakan kembali kode, sistem menjadi kaku dan rapuh sehingga sulit untuk diubah atau diperluas, kode menjadi terlalu kompleks, serta kesulitan dalam penskalaan. Semua ini pada akhirnya meningkatkan waktu dan biaya pengembangan. Menerapkan prinsip SOLID membantu menciptakan basis kode yang lebih fleksibel, dapat diukur, dan mudah dipelihara, memudahkan pembaruan dan peningkatan selama siklus hidup perangkat lunak.
+</details>
+
