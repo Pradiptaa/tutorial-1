@@ -55,3 +55,14 @@ Clean code principles yang sudah diterapkan adalah penamaan variabel dan fungsi 
    Tidak menerapkan prinsip SOLID dalam pengembangan perangkat lunak dapat menyebabkan berbagai kerugian, termasuk sistem yang terlalu bergantung satu sama lain (tight coupling), sulitnya pengujian komponen karena ketergantungan yang kompleks, rendahnya kemampuan untuk menggunakan kembali kode, sistem menjadi kaku dan rapuh sehingga sulit untuk diubah atau diperluas, kode menjadi terlalu kompleks, serta kesulitan dalam penskalaan. Semua ini pada akhirnya meningkatkan waktu dan biaya pengembangan. Menerapkan prinsip SOLID membantu menciptakan basis kode yang lebih fleksibel, dapat diukur, dan mudah dipelihara, memudahkan pembaruan dan peningkatan selama siklus hidup perangkat lunak.
 </details>
 
+<details>
+<summary>
+
+## Modul 4
+</summary>
+
+1. <strong> Reflect based on Percival (2017) proposed self-reflective questions (in “Principles and Best Practice of Testing” submodule, chapter “Evaluating Your Testing Objectives”), whether this TDD flow is useful enough for you or not. If not, explain things that you need to do next time you make more tests. </strong> <br>
+   Penggunaan Test-Driven Development (TDD) yang saya terapkan terbukti efektif dalam memastikan program berfungsi dengan baik, sekaligus memberikan kepercayaan untuk melakukan modifikasi kode. Tes-tes yang dikembangkan tidak hanya memperkuat kualitas program tetapi juga meningkatkan kemudahan dalam pemeliharaan, memungkinkan penataan kode yang lebih terstruktur dan desain yang lebih apik, dengan menyesuaikan keseimbangan antara tes unit dan integrasi berdasarkan feedback yang diperoleh. Meskipun demikian, saya terus berupaya untuk meningkatkan, terutama dalam hal efisiensi tes integrasi, guna memastikan proses pengembangan berjalan lebih cepat dan mulus. <br><br>
+2. <strong> You have created unit tests in Tutorial. Now reflect whether your tests have successfully followed F.I.R.S.T. principle or not. If not, explain things that you need to do the next time you create more tests. </strong> <br>
+   Tes yang saya kembangkan mengadopsi prinsip F.I.R.S.T dengan efektif, menjalankan mereka secepat mungkin untuk tidak menghambat produktivitas dan membedakan antara tes unit dengan fungsional tanpa menunggu ketergantungan eksternal pada tes unit. Setiap tes beroperasi secara independen, tanpa interaksi atau ketergantungan silang, dan memberikan hasil yang konsisten melalui penggunaan teknik Test Double untuk isolasi. Dengan asertasi yang tegas, tes saya menjamin validasi yang kuat dan mencakup spektrum luas skenario, termasuk jalur keberhasilan dan kegagalan serta potensi kesalahan, menjadikannya komprehensif dan responsif terhadap kebutuhan pengujian.
+</details>
