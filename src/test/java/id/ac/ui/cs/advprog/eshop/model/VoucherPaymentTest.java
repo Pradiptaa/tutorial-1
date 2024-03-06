@@ -1,15 +1,21 @@
 package id.ac.ui.cs.advprog.eshop.model;
-import id.ac.ui.cs.advprog.eshop.enums.PaymentMethod;
-import id.ac.ui.cs.advprog.eshop.enums.PaymentStatus;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-class CODPaymentTest {
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import id.ac.ui.cs.advprog.eshop.enums.PaymentMethod;
+import id.ac.ui.cs.advprog.eshop.enums.PaymentStatus;
+
+class VoucherPaymentTest {
     Map<String, String> paymentData;
     Order order;
     List<Product> products;
@@ -38,30 +44,30 @@ class CODPaymentTest {
                 "Safira Sudrajat"
         );
 
-        paymentData.put("address", "Jakarta");
-        paymentData.put("deliveryFee", "1234567890");
+        paymentData.put("voucherCode", "ESHOP1234ABC5678");
     }
 
     @Test
-    void testCreateCODPaymentPendingStatus() {
-        Payment payment = new CODPayment(
-                "e45d7d21-fd29-4533-a569-abbe0819579a",
-                PaymentMethod.CASH.getValue(),
+    void testCreateVoucherPaymentPendingStatus() {
+        Payment payment = new VoucherPayment(
+                "f3b4a3e3-9a7f-4603-92c2-eaf529271cc9",
+                PaymentMethod.VOUCHER.getValue(),
                 order,
                 paymentData
         );
+
+        assertEquals("f3b4a3e3-9a7f-4603-92c2-eaf529271cc9", payment.getId());
+        assertEquals(PaymentMethod.VOUCHER.getValue(), payment.getMethod());
         assertSame(order, payment.getOrder());
         assertEquals(paymentData, payment.getPaymentData());
-        assertEquals("e45d7d21-fd29-4533-a569-abbe0819579a", payment.getId());
-        assertEquals(PaymentMethod.CASH.getValue(), payment.getMethod());
         assertEquals(PaymentStatus.PENDING.getValue(), payment.getStatus());
     }
 
     @Test
-    void testCreateCODPaymentSuccessStatus() {
-        Payment payment = new CODPayment(
+    void testCreateVoucherPaymentSuccessStatus() {
+        Payment payment = new VoucherPayment(
                 "e45d7d21-fd29-4533-a569-abbe0819579a",
-                PaymentMethod.CASH.getValue(),
+                PaymentMethod.VOUCHER.getValue(),
                 order,
                 paymentData,
                 PaymentStatus.SUCCESS.getValue()
@@ -69,15 +75,15 @@ class CODPaymentTest {
         assertSame(order, payment.getOrder());
         assertEquals(paymentData, payment.getPaymentData());
         assertEquals("e45d7d21-fd29-4533-a569-abbe0819579a", payment.getId());
-        assertEquals(PaymentMethod.CASH.getValue(), payment.getMethod());
+        assertEquals(PaymentMethod.VOUCHER.getValue(), payment.getMethod());
         assertEquals(PaymentStatus.SUCCESS.getValue(), payment.getStatus());
     }
 
     @Test
-    void testCreateCODPaymentRejectedStatus() {
-        Payment payment = new CODPayment(
+    void testCreateVoucherPaymentRejectedStatus() {
+        Payment payment = new VoucherPayment(
                 "e45d7d21-fd29-4533-a569-abbe0819579a",
-                PaymentMethod.CASH.getValue(),
+                PaymentMethod.VOUCHER.getValue(),
                 order,
                 paymentData,
                 PaymentStatus.REJECTED.getValue()
@@ -85,17 +91,17 @@ class CODPaymentTest {
         assertSame(order, payment.getOrder());
         assertEquals(paymentData, payment.getPaymentData());
         assertEquals("e45d7d21-fd29-4533-a569-abbe0819579a", payment.getId());
-        assertEquals(PaymentMethod.CASH.getValue(), payment.getMethod());
+        assertEquals(PaymentMethod.VOUCHER.getValue(), payment.getMethod());
         assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
     }
 
     @Test
-    void testCreateCODPaymentInvalidStatus() {
+    void testCreateVoucherPaymentInvalidStatus() {
         assertThrows(IllegalArgumentException.class, () -> {
             @SuppressWarnings("unused")
-            Payment payment = new CODPayment(
+            Payment payment = new VoucherPayment(
                     "e45d7d21-fd29-4533-a569-abbe0819579a",
-                    PaymentMethod.CASH.getValue(),
+                    PaymentMethod.VOUCHER.getValue(),
                     order,
                     paymentData,
                     "MEOW"
@@ -104,12 +110,12 @@ class CODPaymentTest {
     }
 
     @Test
-    void testCreateCODPaymentNullStatus() {
+    void testCreateVoucherPaymentNullStatus() {
         assertThrows(IllegalArgumentException.class, () -> {
             @SuppressWarnings("unused")
-            Payment payment = new CODPayment(
+            Payment payment = new VoucherPayment(
                     "e45d7d21-fd29-4533-a569-abbe0819579a",
-                    PaymentMethod.CASH.getValue(),
+                    PaymentMethod.VOUCHER.getValue(),
                     order,
                     paymentData,
                     null
@@ -118,10 +124,10 @@ class CODPaymentTest {
     }
 
     @Test
-    void testSetCODPaymentStatStatusToSuccess() {
-        Payment payment = new CODPayment(
+    void testSetVoucherPaymentStatStatusToSuccess() {
+        Payment payment = new VoucherPayment(
                 "e45d7d21-fd29-4533-a569-abbe0819579a",
-                PaymentMethod.CASH.getValue(),
+                PaymentMethod.VOUCHER.getValue(),
                 order,
                 paymentData
         );
@@ -130,10 +136,10 @@ class CODPaymentTest {
     }
 
     @Test
-    void testSetCODPaymentStatStatusToRejected() {
-        Payment payment = new CODPayment(
+    void testSetVoucherPaymentStatStatusToRejected() {
+        Payment payment = new VoucherPayment(
                 "e45d7d21-fd29-4533-a569-abbe0819579a",
-                PaymentMethod.CASH.getValue(),
+                PaymentMethod.VOUCHER.getValue(),
                 order,
                 paymentData
         );
@@ -142,10 +148,10 @@ class CODPaymentTest {
     }
 
     @Test
-    void testSetCODPaymentStatStatusToPending() {
-        Payment payment = new CODPayment(
+    void testSetVoucherPaymentStatStatusToPending() {
+        Payment payment = new VoucherPayment(
                 "e45d7d21-fd29-4533-a569-abbe0819579a",
-                PaymentMethod.CASH.getValue(),
+                PaymentMethod.VOUCHER.getValue(),
                 order,
                 paymentData
         );
@@ -154,10 +160,10 @@ class CODPaymentTest {
     }
 
     @Test
-    void testSetCODPaymentStatStatusToInvalid() {
-        Payment payment = new CODPayment(
+    void testSetVoucherPaymentStatStatusToInvalid() {
+        Payment payment = new VoucherPayment(
                 "e45d7d21-fd29-4533-a569-abbe0819579a",
-                PaymentMethod.CASH.getValue(),
+                PaymentMethod.VOUCHER.getValue(),
                 order,
                 paymentData
         );
@@ -167,10 +173,10 @@ class CODPaymentTest {
     }
 
     @Test
-    void testSetCODPaymentStatStatusToNull() {
-        Payment payment = new CODPayment(
+    void testSetVoucherPaymentStatStatusToNull() {
+        Payment payment = new VoucherPayment(
                 "e45d7d21-fd29-4533-a569-abbe0819579a",
-                PaymentMethod.CASH.getValue(),
+                PaymentMethod.VOUCHER.getValue(),
                 order,
                 paymentData
         );
@@ -180,12 +186,12 @@ class CODPaymentTest {
     }
 
     @Test
-    void testCreateCODPaymentWithNullOrder() {
+    void testCreateVoucherPaymentWithNullOrder() {
         assertThrows(IllegalArgumentException.class, () -> {
             @SuppressWarnings("unused")
-            Payment payment = new CODPayment(
+            Payment payment = new VoucherPayment(
                     "e45d7d21-fd29-4533-a569-abbe0819579a",
-                    PaymentMethod.CASH.getValue(),
+                    PaymentMethod.VOUCHER.getValue(),
                     null,
                     paymentData
             );
@@ -193,13 +199,13 @@ class CODPaymentTest {
     }
 
     @Test
-    void testCreateCODPaymentWithEmptyPaymentData() {
+    void testCreateVoucherPaymentWithEmptyPaymentData() {
         paymentData.clear();
         assertThrows(IllegalArgumentException.class, () -> {
             @SuppressWarnings("unused")
-            Payment payment = new CODPayment(
+            Payment payment = new VoucherPayment(
                     "e45d7d21-fd29-4533-a569-abbe0819579a",
-                    PaymentMethod.CASH.getValue(),
+                    PaymentMethod.VOUCHER.getValue(),
                     order,
                     paymentData
             );
@@ -207,12 +213,12 @@ class CODPaymentTest {
     }
 
     @Test
-    void testCreateCODPaymentWithNullPaymentData() {
+    void testCreateVoucherPaymentWithNullPaymentData() {
         assertThrows(IllegalArgumentException.class, () -> {
             @SuppressWarnings("unused")
-            Payment payment = new CODPayment(
+            Payment payment = new VoucherPayment(
                     "e45d7d21-fd29-4533-a569-abbe0819579a",
-                    PaymentMethod.CASH.getValue(),
+                    PaymentMethod.VOUCHER.getValue(),
                     order,
                     null
             );
@@ -220,13 +226,13 @@ class CODPaymentTest {
     }
 
     @Test
-    void testCreateCODPaymentInvalidAddress() {
-        paymentData.put("address", "");
+    void testCreateVoucherPaymentWithEmptyVoucherCode() {
+        paymentData.put("voucherCode", "");
         assertThrows(IllegalArgumentException.class, () -> {
             @SuppressWarnings("unused")
-            Payment payment = new CODPayment(
+            Payment payment = new VoucherPayment(
                     "e45d7d21-fd29-4533-a569-abbe0819579a",
-                    PaymentMethod.CASH.getValue(),
+                    PaymentMethod.VOUCHER.getValue(),
                     order,
                     paymentData
             );
@@ -234,13 +240,13 @@ class CODPaymentTest {
     }
 
     @Test
-    void testCreateCODPaymentInvalidDeliveryFee() {
-        paymentData.put("deliveryFee", "");
+    void testCreateVoucherPaymentWithNullVoucherCode() {
+        paymentData.put("voucherCode", null);
         assertThrows(IllegalArgumentException.class, () -> {
             @SuppressWarnings("unused")
-            Payment payment = new CODPayment(
+            Payment payment = new VoucherPayment(
                     "e45d7d21-fd29-4533-a569-abbe0819579a",
-                    PaymentMethod.CASH.getValue(),
+                    PaymentMethod.VOUCHER.getValue(),
                     order,
                     paymentData
             );
@@ -248,13 +254,13 @@ class CODPaymentTest {
     }
 
     @Test
-    void testCreateCODPaymentWithNullAddress() {
-        paymentData.put("address", null);
+    void testCreateVoucherPaymentWithInvalidVoucherCodeBecauseMoreThan16Length() {
+        paymentData.put("voucherCode", "ESHOP1234ABCD5679");
         assertThrows(IllegalArgumentException.class, () -> {
             @SuppressWarnings("unused")
-            Payment payment = new CODPayment(
+            Payment payment = new VoucherPayment(
                     "e45d7d21-fd29-4533-a569-abbe0819579a",
-                    PaymentMethod.CASH.getValue(),
+                    PaymentMethod.VOUCHER.getValue(),
                     order,
                     paymentData
             );
@@ -262,13 +268,13 @@ class CODPaymentTest {
     }
 
     @Test
-    void testCreateCODPaymentWithNullDeliveryFee() {
-        paymentData.put("deliveryFee", null);
+    void testCreateVoucherPaymentWithInvalidVoucherCodeBecauseNotStartWithESHOP() {
+        paymentData.put("voucherCode", "XSHOP1234ABCD5679");
         assertThrows(IllegalArgumentException.class, () -> {
             @SuppressWarnings("unused")
-            Payment payment = new CODPayment(
+            Payment payment = new VoucherPayment(
                     "e45d7d21-fd29-4533-a569-abbe0819579a",
-                    PaymentMethod.CASH.getValue(),
+                    PaymentMethod.VOUCHER.getValue(),
                     order,
                     paymentData
             );
@@ -276,14 +282,13 @@ class CODPaymentTest {
     }
 
     @Test
-    void testCreateCODPaymentWithInvalidAddressAndDeliveryFee() {
-        paymentData.put("address", "");
-        paymentData.put("deliveryFee", "");
+    void testCreateVoucherPaymentWithInvalidVoucherCodeBecauseNot8Numerics() {
+        paymentData.put("voucherCode", "ESHOP1234ABCD567X");
         assertThrows(IllegalArgumentException.class, () -> {
             @SuppressWarnings("unused")
-            Payment payment = new CODPayment(
+            Payment payment = new VoucherPayment(
                     "e45d7d21-fd29-4533-a569-abbe0819579a",
-                    PaymentMethod.CASH.getValue(),
+                    PaymentMethod.VOUCHER.getValue(),
                     order,
                     paymentData
             );
@@ -291,14 +296,13 @@ class CODPaymentTest {
     }
 
     @Test
-    void testCreateCODPaymentWithNullAddressAndDeliveryFee() {
-        paymentData.put("address", null);
-        paymentData.put("deliveryFee", null);
+    void testCreateVoucherPaymentWithInvalidVoucherCodeBecauseLessThan16Length() {
+        paymentData.put("voucherCode", "ESHOP1234ABCD567");
         assertThrows(IllegalArgumentException.class, () -> {
             @SuppressWarnings("unused")
-            Payment payment = new CODPayment(
+            Payment payment = new VoucherPayment(
                     "e45d7d21-fd29-4533-a569-abbe0819579a",
-                    PaymentMethod.CASH.getValue(),
+                    PaymentMethod.VOUCHER.getValue(),
                     order,
                     paymentData
             );
