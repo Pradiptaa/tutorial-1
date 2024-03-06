@@ -69,22 +69,22 @@ class PaymentRepositoryTest {
                 voucherPaymentData
         );
 
-        Map<String, String> codPaymentData = new HashMap<>();
-        codPaymentData.put("address", "Jakarta");
-        codPaymentData.put("deliveryFee", "1234567890");
-        Payment codPayment = new CODPayment(
+        Map<String, String> bankPaymentData = new HashMap<>();
+        bankPaymentData.put("address", "Jakarta");
+        bankPaymentData.put("deliveryFee", "1234567890");
+        Payment bankPayment = new CODPayment(
                 "d0f81308-9911-40c5-8da4-fa3194485aa1",
                 PaymentMethod.CASH.getValue(),
                 order,
-                codPaymentData
+                bankPaymentData
         );
 
         payments.add(voucherPayment);
-        payments.add(codPayment);
+        payments.add(bankPayment);
     }
 
     @Test
-    void testSaveCreateCOD() {
+    void testSaveCreate() {
         Payment payment = payments.get(1);
         Payment result = paymentRepository.save(payment);
 
@@ -115,7 +115,7 @@ class PaymentRepositoryTest {
     }
 
     @Test
-    void testSaveCreate() {
+    void testSaveCreateBank() {
         Payment payment = payments.get(3);
         Payment result = paymentRepository.save(payment);
 
@@ -140,7 +140,7 @@ class PaymentRepositoryTest {
     }
 
     @Test
-    void testSaveCreateCODPaymentDuplicatedId() {
+    void testSaveCreateBankPaymentDuplicatedId() {
         Payment payment = payments.get(3);
         paymentRepository.save(payment);
         assertThrows(IllegalArgumentException.class, () -> {
